@@ -13,5 +13,7 @@ public interface CustomerService {
 
     Customer updateCustomer(CustomerDto customerDto, Long id);
 
+    Optional<Customer> getCustomerById(Long id);
+
     boolean deleteCustomer(Long id);
 }
