@@ -42,6 +42,13 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<?> getCustomerById(@PathVariable Long id) {
+        return customerService.getCustomerById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     ResponseEntity<?> getAllCustomers() {
         try {

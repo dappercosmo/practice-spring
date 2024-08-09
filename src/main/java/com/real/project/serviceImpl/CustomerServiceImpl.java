@@ -84,6 +84,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Optional<Customer> getCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .map(customer -> Customer.builder()
+                        .firstName(customer.getFirstName())
+                        .lastName(customer.getLastName())
+                        .email(customer.getEmail())
+                        .password(customer.getPassword())
+                        .phone(customer.getPhone())
+                        .isEmailVerified(customer.isEmailVerified())
+                        .addresses(customer.getAddresses())
+                        .build());
+
+    }
+
+
+    @Override
     public boolean deleteCustomer(Long id) {
         return customerRepository.findById(id)
                 .map(customer -> {
@@ -94,6 +110,4 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElse(false);
 
     }
-
-
 }
